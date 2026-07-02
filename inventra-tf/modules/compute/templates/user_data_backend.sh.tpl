@@ -28,7 +28,7 @@ After=network.target
 [Service]
 User=ec2-user
 WorkingDirectory=/opt/inventra-flob/inventra-tf
-Environment="DATABASE_URL=${DB_URL}"
+Environment="DATABASE_URL=$DB_URL"
 Environment="PYTHONPATH=/opt/inventra-flob/inventra-tf"
 ExecStart=/home/ec2-user/.local/bin/gunicorn \
   --bind 0.0.0.0:5000 \
