@@ -29,11 +29,11 @@ server {
     }
 
     location /api/ {
-        proxy_pass http://10.0.2.16:5000;
+        proxy_pass http://${backend_private_ip}:5000;
     }
 
     location /health {
-        proxy_pass http://10.0.2.16:5000/health;
+        proxy_pass http://${backend_private_ip}:5000/health;
     }
 }
 EOF

@@ -18,8 +18,6 @@ pip3 install -r requirements.txt
 sudo mkdir -p /opt/inventra-flob/inventra-tf/instance
 sudo chown -R ec2-user:ec2-user /opt/inventra-flob
 
-DATABASE_URL=$DB_URL python3 inventra.back.seed.py
-
 sudo tee /etc/systemd/system/inventra-backend.service > /dev/null <<EOF
 [Unit]
 Description=Inventra Backend API
