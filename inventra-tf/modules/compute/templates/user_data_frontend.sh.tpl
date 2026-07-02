@@ -18,20 +18,20 @@ cp -r /opt/inventra-flob/inventra-tf/inventra/frontend/* /usr/share/nginx/html/
 #sed -i 's#<script src="app.js"></script>#<script>window.INVENTRA_API_URL = "http://${backend_private_ip}:5000";</script>\n<script src="app.js"></script>#' /usr/share/nginx/html/index.html
 
 # nginx config
-cat > /etc/nginx/conf.d/inventra.conf <<EOF
+sudo tee /etc/nginx/conf.d/inventra.conf > /dev/null <<EOF
 server {
     listen 80;
     root /usr/share/nginx/html;
     index index.html;
 
     location / {
-        try_files $uri $uri/ /index.html;
+        try_files \$uri \$uri/ /index.html;
     }
 
     location /api/ {
         proxy_pass http://10.0.2.16:5000;
     }
-    
+
     location /health {
         proxy_pass http://10.0.2.16:5000/health;
     }
@@ -41,5 +41,5 @@ EOF
 # remove default nginx config
 rm -f /etc/nginx/conf.d/default.conf || true
 
-systemctl enable nginx
-systemctl restart nginx
+sudo systemctl enable nginx
+sudo systemctl restart nginx
