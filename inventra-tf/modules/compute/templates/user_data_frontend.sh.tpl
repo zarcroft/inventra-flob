@@ -25,17 +25,15 @@ server {
     index index.html;
 
     location / {
-        try_files \$uri \$uri/ /index.html;
+        try_files $uri $uri/ /index.html;
     }
 
     location /api/ {
-        proxy_pass http://${backend_private_ip}:5000;
-        proxy_set_header Host \$host;
-        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_pass http://10.0.2.16:5000;
     }
-
+    
     location /health {
-        proxy_pass http://${backend_private_ip}:5000/health;
+        proxy_pass http://10.0.2.16:5000/health;
     }
 }
 EOF
