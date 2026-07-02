@@ -4,7 +4,7 @@
  * L'URL de base est configurable via window.INVENTRA_API_URL
  * (injectée par Nginx ou par la variable d'environnement à la build).
  */
-const API = window.INVENTRA_API_URL || "http://localhost:5000";
+const API = window.INVENTRA_API_URL = "";
 
 // ── État applicatif ───────────────────────────────────────────────────
 let allProducts   = [];
