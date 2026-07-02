@@ -1,0 +1,12 @@
+# Copiez ce fichier en terraform.tfvars et renseignez vos valeurs.
+# NE COMMITEZ JAMAIS terraform.tfvars (il contient le mot de passe DB).
+# Il est déjà listé dans .gitignore.
+
+aws_region   = "eu-west-1"
+project_name = "inventra"
+
+key_pair_name = "votre-keypair"     # créez-la dans la console EC2 avant de lancer apply
+allowed_ssh_cidr = "0.0.0.0/0"     # à remplacer par votre IP : curl ifconfig.me
+
+db_password = "ChangeMe123!"        # minimum 8 caractères, RDS l'exige
+alert_email = "vous@example.com"
