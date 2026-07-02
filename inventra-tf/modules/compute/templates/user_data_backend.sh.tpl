@@ -11,10 +11,15 @@ DB_URL=$(aws ssm get-parameter --name "${db_ssm_path}" \
 
 cd /opt
 git clone https://github.com/zarcroft/inventra-flob.git
-cd inventra-tf/inventra/backend
+cd /opt/inventra-flob/inventra-tf/inventra/backend
 
 python3 -m pip install --upgrade pip
 pip3 install -r requirements.txt
+
+sudo mkdir -p /opt/inventra-flob/inventra-tf/instance
+sudo chown -R ec2-user:ec2-user /opt/inventra-flob
+
+sudo DATABASE_URL=$DB_URL python inventra/backend/seed.py
 
 cat > /etc/systemd/system/inventra-backend.service << SERVICEEOF
 [Unit]
@@ -24,13 +29,14 @@ After=network.target
 [Service]
 Environment="DATABASE_URL=$${DB_URL}"
 Environment="PORT=5000"
-WorkingDirectory=/opt/inventra/backend
-ExecStart=/usr/local/bin/gunicorn --bind 0.0.0.0:5000 --workers 2 app:app
+WorkingDirectory=/opt/inventra-flob/inventra-tf/inventra/backend
+ExecStart=/home/ec2-user/.local/bin/gunicorn --bind 0.0.0.0:5000 --workers 2 app:app
 Restart=always
 
 [Install]
 WantedBy=multi-user.target
 SERVICEEOF
+
 
 systemctl daemon-reload
 systemctl enable --now inventra-backend

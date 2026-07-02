@@ -48,15 +48,16 @@ resource "aws_security_group" "backend" {
   vpc_id      = var.vpc_id
 
   ingress {
-    description     = "API access from frontend only"
-    from_port       = 5000
-    to_port         = 5000
-    protocol        = "tcp"
+    description = "API access from frontend"
+    from_port   = 5000
+    to_port     = 5000
+    protocol    = "tcp"
+
     security_groups = [aws_security_group.frontend.id]
   }
 
   ingress {
-    description = "Restricted SSH"
+    description = "SSH"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
@@ -64,7 +65,6 @@ resource "aws_security_group" "backend" {
   }
 
   egress {
-    description = "All outbound traffic allowed"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"

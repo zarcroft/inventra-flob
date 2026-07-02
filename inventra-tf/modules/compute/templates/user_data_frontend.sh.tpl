@@ -12,7 +12,7 @@ git clone https://github.com/zarcroft/inventra-flob.git
 
 # copie frontend (CORRIGÉ)
 mkdir -p /usr/share/nginx/html
-cp -r /opt/inventra-tf/inventra/frontend/* /usr/share/nginx/html/
+cp -r /opt/inventra-flob/inventra-tf/inventra/frontend/* /usr/share/nginx/html/
 
 # patch API base URL (sécurisé)
 sed -i 's#<script src="app.js"></script>#<script>window.INVENTRA_API_URL = "http://${backend_private_ip}:5000";</script>\n<script src="app.js"></script>#' /usr/share/nginx/html/index.html
