@@ -8,8 +8,8 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 os.environ.setdefault("DATABASE_URL", "sqlite:///inventra_dev.db")
 
-from app import app
-from models import db, Product, StockAlert
+from inventra.backend.app import app
+from inventra.backend.models import db, Product, StockAlert
 
 PRODUCTS = [
     dict(name="Écran 27\" Full HD",   category="Informatique",  sku="ECR-27FHD",  quantity=12,  price=189.99, alert_threshold=5,  unit="pièce"),
