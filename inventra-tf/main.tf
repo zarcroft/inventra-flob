@@ -53,12 +53,12 @@ module "compute" {
 # Chaque module dépend des outputs du(des) précédent(s) — voir le
 # diagramme de dépendances de l'étape 1.
 #
-# module "monitoring" {
-#   source = "./modules/monitoring"
-#
-#   name_prefix           = var.project_name
-#   alert_email           = var.alert_email
-#   backend_instance_id   = module.compute.backend_instance_id
-#   frontend_instance_id  = module.compute.frontend_instance_id
-#   db_identifier         = module.database.db_identifier
-# }
+module "monitoring" {
+  source = "./modules/monitoring"
+
+  name_prefix          = var.project_name
+  alert_email          = var.alert_email
+  backend_instance_id  = module.compute.backend_instance_id
+  frontend_instance_id = module.compute.frontend_instance_id
+  db_identifier        = module.database.db_identifier
+}
