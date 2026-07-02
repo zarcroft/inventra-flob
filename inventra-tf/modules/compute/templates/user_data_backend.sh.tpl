@@ -28,7 +28,7 @@ User=ec2-user
 WorkingDirectory=/opt/inventra-flob/inventra-tf
 Environment="DATABASE_URL=$DB_URL"
 Environment="PYTHONPATH=/opt/inventra-flob/inventra-tf"
-ExecStart=/home/ec2-user/.local/bin/gunicorn \
+ExecStart=/usr/local/bin/gunicorn \
   --bind 0.0.0.0:5000 \
   --workers 2 \
   inventra.backend.app:app
